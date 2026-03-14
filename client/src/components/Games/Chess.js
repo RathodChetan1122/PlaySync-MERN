@@ -6,7 +6,7 @@ const PIECE_SYMBOLS = {
   black: { K: '♚', Q: '♛', R: '♜', B: '♝', N: '♞', P: '♟' },
 };
 
-export default function Chess({ socket, roomCode, user }) {
+export default function Chess({ socket, roomCode, user }){
   const [state, setState] = useState(null);
   const [selected, setSelected] = useState(null);
   const [gameOver, setGameOver] = useState(null);
