@@ -7,6 +7,8 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import './DashboardPage.css';
 
+const BASE = process.env.REACT_APP_SERVER_URL || 'http://localhost:5000';
+
 export default function DashboardPage() {
   const { user } = useAuth();
   const { connected } = useSocket();
@@ -26,10 +28,11 @@ export default function DashboardPage() {
 
   const fetchRooms = async () => {
     try {
-      const res = await axios.get('/api/rooms');
-      setRooms(res.data);
+      const res = await axios.get(`${BASE}/api/rooms`);
+      setRooms(Array.isArray(res.data) ? res.data : []);
     } catch (err) {
       toast.error('Failed to load rooms');
+      setRooms([]);
     } finally {
       setLoading(false);
     }
@@ -40,7 +43,7 @@ export default function DashboardPage() {
     if (!createForm.name.trim()) return toast.error('Room name required');
     setCreating(true);
     try {
-      const res = await axios.post('/api/rooms', createForm);
+      const res = await axios.post(`${BASE}/api/rooms`, createForm);
       toast.success('Room created!');
       navigate(`/room/${res.data.code}`);
     } catch (err) {
@@ -54,7 +57,7 @@ export default function DashboardPage() {
     e.preventDefault();
     if (!joinCode.trim()) return toast.error('Room code required');
     try {
-      const res = await axios.post('/api/rooms/join', { code: joinCode, password: joinPassword });
+      const res = await axios.post(`${BASE}/api/rooms/join`, { code: joinCode, password: joinPassword });
       toast.success(`Joined ${res.data.name}!`);
       navigate(`/room/${res.data.code}`);
     } catch (err) {
@@ -64,7 +67,7 @@ export default function DashboardPage() {
 
   const quickJoin = async (code) => {
     try {
-      await axios.post('/api/rooms/join', { code });
+      await axios.post(`${BASE}/api/rooms/join`, { code });
       navigate(`/room/${code}`);
     } catch (err) {
       toast.error(err.response?.data?.message || 'Failed to join');

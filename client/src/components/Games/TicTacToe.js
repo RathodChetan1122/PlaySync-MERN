@@ -1,10 +1,9 @@
-import { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Games.css';
 
 export default function TicTacToe({ socket, roomCode, user }) {
   const [gameState, setGameState] = useState(null);
   const [result, setResult] = useState(null);
-
   const [myMark, setMyMark] = useState(null);
 
   useEffect(() => {
@@ -20,7 +19,6 @@ export default function TicTacToe({ socket, roomCode, user }) {
 
     // Auto-join
     socket.emit('game:move', { roomCode, gameType: 'tictactoe', move: { action: 'ready' } });
-  
 
     return () => {
       socket.off('game:tictactoe:state');

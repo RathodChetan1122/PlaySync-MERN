@@ -4,14 +4,16 @@ import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
 import './LeaderboardPage.css';
 
+const BASE = process.env.REACT_APP_SERVER_URL || 'http://localhost:5000';
+
 export default function LeaderboardPage() {
   const { user } = useAuth();
   const [players, setPlayers] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get('/api/users/leaderboard')
-      .then(res => setPlayers(res.data))
+    axios.get(`${BASE}/api/users/leaderboard`)
+      .then(res => setPlayers(Array.isArray(res.data) ? res.data : []))
       .finally(() => setLoading(false));
   }, []);
 

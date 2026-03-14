@@ -5,6 +5,8 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import './LobbyPage.css';
 
+const BASE = process.env.REACT_APP_SERVER_URL || 'http://localhost:5000';
+
 export default function LobbyPage() {
   const [rooms, setRooms] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -15,15 +17,15 @@ export default function LobbyPage() {
 
   const fetchRooms = async () => {
     try {
-      const res = await axios.get('/api/rooms');
-      setRooms(res.data);
-    } catch { toast.error('Failed to fetch rooms'); }
+      const res = await axios.get(`${BASE}/api/rooms`);
+      setRooms(Array.isArray(res.data) ? res.data : []);
+    } catch { toast.error('Failed to fetch rooms'); setRooms([]); }
     finally { setLoading(false); }
   };
 
   const joinRoom = async (code) => {
     try {
-      await axios.post('/api/rooms/join', { code });
+      await axios.post(`${BASE}/api/rooms/join`, { code });
       navigate(`/room/${code}`);
     } catch (err) { toast.error(err.response?.data?.message || 'Failed to join'); }
   };

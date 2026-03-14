@@ -5,6 +5,8 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import './ProfilePage.css';
 
+const BASE = process.env.REACT_APP_SERVER_URL || 'http://localhost:5000';
+
 const AVATARS = [
   '🎮', '🕹️', '👾', '🤖', '🦊', '🐉', '🦁', '🐺',
   '🦅', '🦋', '🌟', '⚡', '🔥', '💎', '🎯', '🏆',
@@ -18,7 +20,7 @@ export default function ProfilePage() {
   const saveProfile = async () => {
     setSaving(true);
     try {
-      const res = await axios.put('/api/users/profile', { avatar: selectedAvatar });
+      const res = await axios.put(`${BASE}/api/users/profile`, { avatar: selectedAvatar });
       setUser(res.data);
       toast.success('Profile updated!');
     } catch {

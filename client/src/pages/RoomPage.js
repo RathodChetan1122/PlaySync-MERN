@@ -1,18 +1,20 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
-import { useNavigate, useParams } from 'react-router-dom';
-import ChatPanel from '../components/Chat/ChatPanel';
-import Chess from '../components/Games/Chess';
-import GameSelector from '../components/Games/GameSelector';
-import RPS from '../components/Games/RPS';
-import TicTacToe from '../components/Games/TicTacToe';
-import WordScramble from '../components/Games/WordScramble';
-import Navbar from '../components/Layout/Navbar';
-import MembersList from '../components/Rooms/MembersList';
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useSocket } from '../context/SocketContext';
+import Navbar from '../components/Layout/Navbar';
+import ChatPanel from '../components/Chat/ChatPanel';
+import MembersList from '../components/Rooms/MembersList';
+import GameSelector from '../components/Games/GameSelector';
+import TicTacToe from '../components/Games/TicTacToe';
+import RPS from '../components/Games/RPS';
+import WordScramble from '../components/Games/WordScramble';
+import Chess from '../components/Games/Chess';
+import axios from 'axios';
+import toast from 'react-hot-toast';
 import './RoomPage.css';
+
+const BASE = process.env.REACT_APP_SERVER_URL || 'http://localhost:5000';
 
 export default function RoomPage() {
   const { code } = useParams();
@@ -79,9 +81,9 @@ export default function RoomPage() {
 
   const loadRoom = async () => {
     try {
-      const res = await axios.get(`/api/rooms/${code}`);
+      const res = await axios.get(`${BASE}/api/rooms/${code}`);
       setRoom(res.data);
-      setMembers(res.data.members);
+      setMembers(res.data.members || []);
       setMessages(res.data.messages || []);
       if (res.data.currentGame?.isActive) setActiveGame(res.data.currentGame.type);
     } catch {
@@ -94,7 +96,7 @@ export default function RoomPage() {
 
   const handleLeave = async () => {
     try {
-      await axios.delete(`/api/rooms/${room._id}/leave`);
+      await axios.delete(`${BASE}/api/rooms/${room._id}/leave`);
       navigate('/dashboard');
     } catch {
       navigate('/dashboard');

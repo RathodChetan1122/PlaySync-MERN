@@ -10,11 +10,18 @@ export const SocketProvider = ({ children }) => {
   const [connected, setConnected] = useState(false);
 
   useEffect(() => {
-    if (!token) { if (socket) { socket.disconnect(); setSocket(null); } return; }
+    if (!token) {
+      if (socket) { socket.disconnect(); setSocket(null); }
+      return;
+    }
 
     const s = io(process.env.REACT_APP_SERVER_URL || 'http://localhost:5000', {
       auth: { token },
-      transports: ['websocket'],
+      transports: ['polling', 'websocket'], // polling first for Render free tier
+      upgrade: true,
+      reconnection: true,
+      reconnectionAttempts: 5,
+      reconnectionDelay: 1000,
     });
 
     s.on('connect', () => { setConnected(true); console.log('🔌 Socket connected'); });
