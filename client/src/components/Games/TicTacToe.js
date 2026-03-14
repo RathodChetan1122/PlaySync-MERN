@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './Games.css';
 
 export default function TicTacToe({ socket, roomCode, user }) {
@@ -48,7 +48,7 @@ export default function TicTacToe({ socket, roomCode, user }) {
 
   const isMyTurn = gameState?.currentPlayer === myMark && gameState?.status === 'playing';
   const isWinner = result && result.winner !== 'draw' && result.players?.[result.winner]?.id === user._id;
-  const isLoser = result && result.winner !== 'draw' && result.players?.[result.winner]?.id !== user._id;
+ 
 
   return (
     <div className="game-wrap">
