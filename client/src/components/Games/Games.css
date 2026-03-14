@@ -1,0 +1,298 @@
+/* ── Shared Game Container ──────────────────── */
+.game-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  padding: 8px 0;
+}
+
+.game-status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  margin-bottom: 16px;
+  font-size: 13px;
+}
+
+.turn-indicator {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+.turn-indicator.your-turn { color: var(--accent-green); animation: pulse 1.5s ease-in-out infinite; }
+
+.game-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 40px;
+  text-align: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+.result-icon { font-size: 64px; }
+.game-result h3 { font-size: 24px; font-weight: 700; }
+
+.waiting-room {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 40px;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+/* ── Tic Tac Toe ────────────────────────────── */
+.ttt-wrapper { width: 100%; max-width: 440px; }
+
+.ttt-players {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.ttt-player {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  transition: all 0.2s;
+}
+.ttt-player.active { border-color: var(--accent-primary); box-shadow: var(--glow-purple); }
+.ttt-mark { font-size: 20px; font-weight: 700; }
+.ttt-vs { font-size: 12px; color: var(--text-muted); font-weight: 600; }
+.text-x { color: #ef4444; }
+.text-o { color: #06b6d4; }
+
+.ttt-board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+.ttt-board.disabled { pointer-events: none; }
+
+.ttt-cell {
+  aspect-ratio: 1;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 36px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ttt-cell.empty:hover { background: var(--bg-hover); border-color: var(--accent-primary); }
+.ttt-cell.cell-x { color: #ef4444; }
+.ttt-cell.cell-o { color: #06b6d4; }
+.ttt-cell.winning { background: rgba(16,185,129,0.15); border-color: var(--accent-green); }
+
+/* ── RPS ──────────────────────────────────────── */
+.rps-wrapper { width: 100%; max-width: 500px; }
+
+.rps-scores {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  margin-bottom: 20px;
+}
+.rps-score-item { display: flex; align-items: center; gap: 10px; font-size: 14px; }
+.rps-score { font-family: var(--font-display); font-size: 24px; font-weight: 700; color: var(--accent-primary); }
+.rps-player-name { font-weight: 500; }
+.rps-round { font-size: 12px; color: var(--text-muted); }
+
+.rps-prompt { text-align: center; margin-bottom: 16px; color: var(--text-secondary); font-size: 14px; }
+
+.rps-choices {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.rps-choice-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 20px 28px;
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.rps-choice-btn:hover:not(.locked) { border-color: var(--accent-primary); transform: translateY(-4px); box-shadow: var(--glow-purple); }
+.rps-choice-btn.selected { border-color: var(--accent-green); background: rgba(16,185,129,0.1); }
+.rps-choice-btn.locked { opacity: 0.6; cursor: default; }
+.rps-icon { font-size: 40px; }
+
+.rps-round-result {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  text-align: center;
+}
+.rps-reveal { display: flex; justify-content: center; gap: 32px; margin-bottom: 12px; }
+.rps-reveal-item { display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 13px; }
+.rps-reveal-icon { font-size: 40px; }
+.rps-winner { font-weight: 600; font-size: 16px; color: var(--accent-yellow); }
+
+/* ── Word Scramble ──────────────────────────── */
+.ws-wrapper { width: 100%; max-width: 560px; }
+
+.ws-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.ws-round { font-family: var(--font-display); font-size: 13px; color: var(--accent-primary); }
+.ws-hint { font-size: 13px; color: var(--text-secondary); }
+
+.ws-scrambled {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 24px;
+  padding: 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.ws-letter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 52px;
+  background: var(--bg-secondary);
+  border: 2px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent-secondary);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.ws-scores {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.ws-score-item {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 13px;
+}
+.ws-pts { font-weight: 700; color: var(--accent-primary); }
+
+.ws-form { display: flex; gap: 10px; }
+.ws-input { flex: 1; }
+
+.ws-correct {
+  background: rgba(16,185,129,0.1);
+  border: 1px solid var(--accent-green);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  font-size: 14px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.ws-feedback { color: var(--accent-red); font-size: 13px; text-align: center; margin-top: 8px; }
+
+.ws-final-scores { display: flex; flex-direction: column; gap: 8px; width: 100%; margin-top: 8px; }
+.ws-score-row { display: flex; justify-content: space-between; padding: 8px 16px; background: var(--bg-secondary); border-radius: var(--radius-sm); font-size: 14px; }
+
+/* ── Chess ──────────────────────────────────── */
+.chess-wrapper { width: 100%; max-width: 520px; }
+
+.chess-players {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.chess-player {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  transition: all 0.2s;
+}
+.chess-player.active { border-color: var(--accent-yellow); }
+
+.chess-board {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  border: 2px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+.chess-board.flipped { transform: rotate(180deg); }
+.chess-board.flipped .chess-piece { transform: rotate(180deg); }
+
+.chess-cell {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.1s;
+  position: relative;
+}
+.chess-cell.light { background: #e8d5b0; }
+.chess-cell.dark { background: #b58762; }
+.chess-cell.selected { background: rgba(124,58,237,0.6) !important; }
+.chess-cell.last-move { background: rgba(6,182,212,0.35) !important; }
+.chess-cell:hover { filter: brightness(1.15); }
+
+.chess-piece {
+  font-size: clamp(18px, 4vw, 28px);
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.chess-piece.white { filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)); }
+.chess-piece.black { filter: drop-shadow(0 1px 2px rgba(0,0,0,0.8)); }
