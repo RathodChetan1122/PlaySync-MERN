@@ -128,7 +128,7 @@ export default function Chess({ socket, roomCode, user }) {
       socket.off('game:chess:over');
       socket.off('game:chess:invalid');
     };
-  }, [socket]); // eslint-disable-line
+  }, [socket]); // eslint-disable
 
   const handleCellClick = useCallback((row, col) => {
     if (!state || state.status !== 'playing') return;
