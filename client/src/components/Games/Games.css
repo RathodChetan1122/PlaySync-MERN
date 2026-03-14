@@ -264,3 +264,33 @@
 }
 .waiting-dots span:nth-child(2) { animation-delay: 0.2s; background: var(--cyan); }
 .waiting-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+/* ── Result win glow ──────────────────────────── */
+.result-win {
+  border-color: rgba(16,185,129,0.3) !important;
+  background: linear-gradient(135deg, rgba(16,185,129,0.05), var(--card2)) !important;
+}
+
+/* ── TTT statusbar ────────────────────────────── */
+.ttt-statusbar {
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--card2); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 12px 16px; gap: 10px; flex-wrap: wrap;
+}
+.ttt-player-pill {
+  display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500;
+}
+.ttt-turn-badge {
+  font-size: 12px; padding: 5px 14px; border-radius: 20px;
+  background: var(--bg4); color: var(--text2);
+  border: 1px solid var(--border); font-weight: 500;
+}
+.ttt-turn-badge.your-turn {
+  background: rgba(16,185,129,0.1); color: var(--green);
+  border-color: rgba(16,185,129,0.2);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+.you-tag {
+  font-size: 10px; padding: 1px 7px; border-radius: 10px;
+  background: rgba(59,130,246,0.15); color: var(--blue); font-weight: 600;
+}
