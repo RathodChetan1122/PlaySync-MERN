@@ -1,17 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
+import { useNavigate, useParams } from 'react-router-dom';
+import ChatPanel from '../components/Chat/ChatPanel';
+import Chess from '../components/Games/Chess';
+import GameSelector from '../components/Games/GameSelector';
+import RPS from '../components/Games/RPS';
+import TicTacToe from '../components/Games/TicTacToe';
+import WordScramble from '../components/Games/WordScramble';
+import Navbar from '../components/Layout/Navbar';
+import MembersList from '../components/Rooms/MembersList';
 import { useAuth } from '../context/AuthContext';
 import { useSocket } from '../context/SocketContext';
-import Navbar from '../components/Layout/Navbar';
-import ChatPanel from '../components/Chat/ChatPanel';
-import MembersList from '../components/Rooms/MembersList';
-import GameSelector from '../components/Games/GameSelector';
-import TicTacToe from '../components/Games/TicTacToe';
-import RPS from '../components/Games/RPS';
-import WordScramble from '../components/Games/WordScramble';
-import Chess from '../components/Games/Chess';
-import axios from 'axios';
-import toast from 'react-hot-toast';
 import './RoomPage.css';
 
 export default function RoomPage() {
