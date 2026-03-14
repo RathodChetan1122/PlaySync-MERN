@@ -2,6 +2,8 @@ import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
+const BASE = process.env.REACT_APP_SERVER_URL || 'http://localhost:5000';
+
 /**
  * Custom hook for room data, members, messages and socket binding.
  */
@@ -14,7 +16,7 @@ export function useRoom(code, socket, user) {
 
   const loadRoom = useCallback(async () => {
     try {
-      const res = await axios.get(`/api/rooms/${code}`);
+      const res = await axios.get(`${BASE}/api/rooms/${code}`);
       setRoom(res.data);
       setMembers(res.data.members || []);
       setMessages(res.data.messages || []);
