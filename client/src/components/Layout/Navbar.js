@@ -11,44 +11,39 @@ export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleLogout = () => { logout(); toast.success('Logged out!'); navigate('/login'); };
+  const handleLogout = () => { logout(); toast.success('Logged out'); navigate('/login'); };
 
   const links = [
-    { to: '/dashboard', label: '🏠 Dashboard' },
-    { to: '/lobby', label: '🎮 Lobby' },
-    { to: '/leaderboard', label: '🏆 Leaderboard' },
-    { to: '/profile', label: '👤 Profile' },
+    { to: '/dashboard', label: 'Dashboard', icon: '⊞' },
+    { to: '/lobby', label: 'Lobby', icon: '◈' },
+    { to: '/leaderboard', label: 'Rankings', icon: '◆' },
+    { to: '/profile', label: 'Profile', icon: '◉' },
   ];
 
   return (
     <nav className="navbar">
       <div className="navbar-inner">
         <Link to="/dashboard" className="navbar-brand">
-          <span>🎮</span>
+          <div className="navbar-brand-icon">🎮</div>
           <span className="navbar-brand-text">PlaySync</span>
         </Link>
-
         <div className="navbar-links">
           {links.map(l => (
-            <Link key={l.to} to={l.to}
-              className={`navbar-link ${location.pathname === l.to ? 'active' : ''}`}>
-              {l.label}
+            <Link key={l.to} to={l.to} className={`navbar-link ${location.pathname === l.to ? 'active' : ''}`}>
+              <span>{l.icon}</span> {l.label}
             </Link>
           ))}
         </div>
-
         <div className="navbar-right">
-          <div className={`socket-indicator ${connected ? 'connected' : 'disconnected'}`}>
+          <div className={`socket-pill ${connected ? 'on' : 'off'}`}>
             <span className="socket-dot" />
             {connected ? 'Live' : 'Offline'}
           </div>
-          <div className="navbar-user">
-            <div className="navbar-avatar">
-              {user?.avatar ? <img src={user.avatar} alt="" /> : user?.username?.[0]?.toUpperCase()}
-            </div>
-            <span className="navbar-username">{user?.username}</span>
+          <span className="nav-username">{user?.username}</span>
+          <div className="nav-avatar">
+            {user?.avatar ? user.avatar : user?.username?.[0]?.toUpperCase()}
           </div>
-          <button className="btn btn-secondary btn-sm" onClick={handleLogout}>Logout</button>
+          <button className="btn btn-ghost btn-sm" onClick={handleLogout}>Sign out</button>
         </div>
       </div>
     </nav>
