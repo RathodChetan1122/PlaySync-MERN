@@ -5,7 +5,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
 PlaySync is a full-stack real-time multiplayer gaming and chat platform built with the MERN stack and Socket.IO. Players can create rooms, invite friends, chat live, and play 4 interactive games together.
-
+ 
 ---
 
 ## ✨ Features
