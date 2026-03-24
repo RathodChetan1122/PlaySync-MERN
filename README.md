@@ -11,7 +11,7 @@ PlaySync is a full-stack real-time multiplayer gaming and chat platform built wi
 ## ✨ Features
 
 - 🔐 **JWT Auth** — Register & login with secure token-based auth
-- 🏠 **Game Rooms** — Create public/private rooms with codes & passwords
+- 🏠 **Game Rooms**  — Create public/private rooms with codes & passwords
 - 💬 **Real-Time Chat** — Live messaging with typing indicators
 - 🎮 **4 Games** — Tic Tac Toe, Rock Paper Scissors, Word Scramble, Chess
 - 🏆 **Leaderboard** — Track wins and player rankings
