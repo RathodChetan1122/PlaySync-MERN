@@ -1,6 +1,6 @@
 #!/bin/bash
 # ============================================================
-# PlaySync — GitHub Push Script
+# PlaySync — GitHub Push Script 
 # Repo: https://github.com/RathodChetan1122/PlaySync-MERN
 # ============================================================  
 
